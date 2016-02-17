@@ -1,0 +1,27 @@
+{
+  "name": "xml-stringify",
+  "version": "0.0.1",
+  "description": "Stringify XML AST built from segmentio/xml-parser.",
+  "main": "index.js",
+  "scripts": {
+    "test": "xo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1000ch/xml-stringify.git"
+  },
+  "author": "1000ch",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/1000ch/xml-stringify/issues"
+  },
+  "homepage": "https://github.com/1000ch/xml-stringify#readme",
+  "devDependencies": {
+    "ava": "*",
+    "xo": "*"
+  },
+  "xo": {
+    "envs": ["node", "browser"],
+    "space": 2
+  }
+}
