@@ -1,6 +1,6 @@
 'use strict';
 
-const createIndent = depth => Array(depth * 2 + 1).join(' ');
+const createIndent = (depth, indent) => Array(depth + 1).join(indent);
 
 const createAttributes = attributes => {
   let html = '';
@@ -24,30 +24,34 @@ const createIsolateTag = object => {
   return xml;
 };
 
-const createXML = (object, depth) => {
+const createXML = (object, depth, indent) => {
   let xml = '';
   if (object.children.length) {
-    xml += `${createIndent(depth)}${createOpenTag(object)}\n`;
+    xml += `${createIndent(depth, indent)}${createOpenTag(object)}\n`;
     if (object.content) {
-      xml += `${createIndent(depth + 1)}${object.content}\n`;
+      xml += `${createIndent(depth + 1, indent)}${object.content}\n`;
     }
     object.children.forEach(child => {
-      xml += createXML(child, depth + 1);
+      xml += createXML(child, depth + 1, indent);
     });
-    xml += `${createIndent(depth)}${createCloseTag(object)}\n`;
+    xml += `${createIndent(depth, indent)}${createCloseTag(object)}\n`;
   } else {
-    xml += `${createIndent(depth)}${createIsolateTag(object)}\n`;
+    xml += `${createIndent(depth, indent)}${createIsolateTag(object)}\n`;
   }
   return xml;
 };
 
-const stringify = (ast, depth) => {
+const stringify = (ast, indent) => {
+  if (typeof indent !== 'string') {
+    indent = '  ';
+  }
+
   let xml = '';
   try {
     if (ast.declaration) {
       xml += `<?xml${createAttributes(ast.declaration.attributes)}?>\n`;
     }
-    xml += createXML(ast.root, depth);
+    xml += createXML(ast.root, 0, indent);
   } catch (e) {
     return xml;
   }

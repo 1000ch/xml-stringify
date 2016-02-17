@@ -9,7 +9,7 @@ const parse = require('xml-parser');
 const stringify = require('xml-stringify');
 
 let ast = parse('<foo>Foo!</foo>');
-let xml = stringify(ast, 2);
+let xml = stringify(ast);
 
 console.log(xml);
 ```

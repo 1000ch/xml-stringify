@@ -4,7 +4,7 @@
   "description": "Stringify XML AST built from segmentio/xml-parser.",
   "main": "index.js",
   "scripts": {
-    "test": "xo"
+    "test": "xo && ava"
   },
   "repository": {
     "type": "git",
@@ -18,10 +18,14 @@
   "homepage": "https://github.com/1000ch/xml-stringify#readme",
   "devDependencies": {
     "ava": "*",
+    "xml-parser": "^1.2.1",
     "xo": "*"
   },
   "xo": {
-    "envs": ["node", "browser"],
+    "envs": [
+      "node",
+      "browser"
+    ],
     "space": 2
   }
 }
