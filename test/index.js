@@ -3,7 +3,7 @@ import test from 'ava';
 import parse from 'xml-parser';
 import stringify from '../';
 
-test('Format xml with declaration', t => {
+test('Stringify AST with declaration', t => {
   t.plan(1);
 
   let fixtures = fs.readFileSync(`${__dirname}/fixtures/1.xml`, 'utf8');
@@ -13,7 +13,7 @@ test('Format xml with declaration', t => {
   t.same(stringify(ast), expected);
 });
 
-test('Format xml without declaration', t => {
+test('Stringify AST without declaration', t => {
   t.plan(1);
 
   let fixtures = fs.readFileSync(`${__dirname}/fixtures/2.xml`, 'utf8');
@@ -23,7 +23,7 @@ test('Format xml without declaration', t => {
   t.same(stringify(ast), expected);
 });
 
-test('Format xml including isolated tag', t => {
+test('Stringify AST including isolated tag', t => {
   t.plan(1);
 
   let fixtures = fs.readFileSync(`${__dirname}/fixtures/3.xml`, 'utf8');

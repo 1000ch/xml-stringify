@@ -1,20 +1,26 @@
 'use strict';
 
-const createIndent = (depth, indent) => Array(depth + 1).join(indent);
+function createIndent(depth, indent) {
+  return Array(depth + 1).join(indent);
+}
 
-const createAttributes = attributes => {
+function createAttributes(attributes) {
   let html = '';
   Object.keys(attributes).forEach(key => {
     html += ` ${key}="${attributes[key]}"`;
   });
   return html;
-};
+}
 
-const createOpenTag = object => `<${object.name}${createAttributes(object.attributes)}>`;
+function createOpenTag(object) {
+  return `<${object.name}${createAttributes(object.attributes)}>`;
+}
 
-const createCloseTag = object => `</${object.name}>`;
+function createCloseTag(object) {
+  return `</${object.name}>`;
+}
 
-const createIsolateTag = object => {
+function createIsolateTag(object) {
   let xml = '';
   if (object.content) {
     xml += `<${object.name}${createAttributes(object.attributes)}>${object.content}</${object.name}>`;
@@ -22,9 +28,9 @@ const createIsolateTag = object => {
     xml += `<${object.name}${createAttributes(object.attributes)} />`;
   }
   return xml;
-};
+}
 
-const createXML = (object, depth, indent) => {
+function createXML(object, depth, indent) {
   let xml = '';
   if (object.children.length) {
     xml += `${createIndent(depth, indent)}${createOpenTag(object)}\n`;
@@ -39,23 +45,20 @@ const createXML = (object, depth, indent) => {
     xml += `${createIndent(depth, indent)}${createIsolateTag(object)}\n`;
   }
   return xml;
-};
+}
 
-const stringify = (ast, indent) => {
+function stringify(ast, indent) {
   if (typeof indent !== 'string') {
     indent = '  ';
   }
 
   let xml = '';
-  try {
-    if (ast.declaration) {
-      xml += `<?xml${createAttributes(ast.declaration.attributes)}?>\n`;
-    }
-    xml += createXML(ast.root, 0, indent);
-  } catch (e) {
-    return xml;
+  if (ast.declaration) {
+    xml += `<?xml${createAttributes(ast.declaration.attributes)}?>\n`;
   }
+  xml += createXML(ast.root, 0, indent);
+
   return xml;
-};
+}
 
 module.exports = stringify;

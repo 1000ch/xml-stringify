@@ -1,6 +1,6 @@
 # xml-stringify [![Build Status](https://travis-ci.org/1000ch/xml-stringify.svg?branch=master)](https://travis-ci.org/1000ch/xml-stringify)
 
-Stringify XML AST built from [segmentio/xml-parser](https://github.com/segmentio/xml-parser).
+Stringify AST built from [segmentio/xml-parser](https://github.com/segmentio/xml-parser).
 
 ## Usage
 
