@@ -32,29 +32,35 @@ function createIsolateTag(object) {
 
 function createXML(object, depth, indent) {
   let xml = '';
+  let br = indent.length === 0 ? '' : '\n';
   if (object.children.length) {
-    xml += `${createIndent(depth, indent)}${createOpenTag(object)}\n`;
+    xml += `${createIndent(depth, indent)}${createOpenTag(object)}${br}`;
     if (object.content) {
-      xml += `${createIndent(depth + 1, indent)}${object.content}\n`;
+      xml += `${createIndent(depth + 1, indent)}${object.content}${br}`;
     }
     object.children.forEach(child => {
       xml += createXML(child, depth + 1, indent);
     });
-    xml += `${createIndent(depth, indent)}${createCloseTag(object)}\n`;
+    xml += `${createIndent(depth, indent)}${createCloseTag(object)}${br}`;
   } else {
-    xml += `${createIndent(depth, indent)}${createIsolateTag(object)}\n`;
+    xml += `${createIndent(depth, indent)}${createIsolateTag(object)}${br}`;
   }
   return xml;
 }
 
 function stringify(ast, indent) {
-  if (typeof indent !== 'string') {
-    indent = '  ';
+  if (typeof indent === 'number') {
+    indent = ' '.repeat(parseInt(indent, 10));
+  } else if (typeof indent === 'string') {
+    indent = indent;
+  } else {
+    indent = '';
   }
 
   let xml = '';
+  let br = indent.length === 0 ? '' : '\n';
   if (ast.declaration) {
-    xml += `<?xml${createAttributes(ast.declaration.attributes)}?>\n`;
+    xml += `<?xml${createAttributes(ast.declaration.attributes)}?>${br}`;
   }
   xml += createXML(ast.root, 0, indent);
 
