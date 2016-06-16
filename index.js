@@ -48,13 +48,12 @@ function createXML(object, depth, indent) {
   return xml;
 }
 
-function stringify(ast, indent) {
-  if (typeof indent === 'number') {
-    indent = ' '.repeat(parseInt(indent, 10));
-  } else if (typeof indent === 'string') {
-    indent = indent;
-  } else {
-    indent = '';
+function stringify(ast, arg) {
+  let indent = '';
+  if (typeof arg === 'number') {
+    indent = ' '.repeat(parseInt(arg, 10));
+  } else if (typeof arg === 'string') {
+    indent = arg;
   }
 
   let xml = '';
