@@ -6,10 +6,7 @@
   "scripts": {
     "test": "xo && ava"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/1000ch/xml-stringify.git"
-  },
+  "repository": "1000ch/xml-stringify",
   "author": "1000ch",
   "license": "MIT",
   "bugs": {
@@ -17,9 +14,9 @@
   },
   "homepage": "https://github.com/1000ch/xml-stringify#readme",
   "devDependencies": {
-    "ava": "*",
+    "ava": "^0.15.2",
     "xml-parser": "^1.2.1",
-    "xo": "*"
+    "xo": "^0.16.0"
   },
   "xo": {
     "envs": [
