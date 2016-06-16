@@ -10,7 +10,7 @@ test('With declaration', t => {
   let expected = fs.readFileSync(`${__dirname}/expected/1.xml`, 'utf8');
   let ast = parse(fixtures.toString());
 
-  t.same(stringify(ast, 2), expected);
+  t.deepEqual(stringify(ast, 2), expected);
 });
 
 test('Without declaration', t => {
@@ -20,7 +20,7 @@ test('Without declaration', t => {
   let expected = fs.readFileSync(`${__dirname}/expected/2.xml`, 'utf8');
   let ast = parse(fixtures.toString());
 
-  t.same(stringify(ast), expected);
+  t.deepEqual(stringify(ast), expected);
 });
 
 test('Including isolated tag', t => {
@@ -30,7 +30,7 @@ test('Including isolated tag', t => {
   let expected = fs.readFileSync(`${__dirname}/expected/3.xml`, 'utf8');
   let ast = parse(fixtures.toString());
 
-  t.same(stringify(ast, 2), expected);
+  t.deepEqual(stringify(ast, 2), expected);
 });
 
 test('Indent with specified length space', t => {
@@ -40,7 +40,7 @@ test('Indent with specified length space', t => {
   let expected = fs.readFileSync(`${__dirname}/expected/4.xml`, 'utf8');
   let ast = parse(fixtures.toString());
 
-  t.same(stringify(ast, 3), expected);
+  t.deepEqual(stringify(ast, 3), expected);
 });
 
 test('Indent with any specified string', t => {
@@ -50,5 +50,5 @@ test('Indent with any specified string', t => {
   let expected = fs.readFileSync(`${__dirname}/expected/5.xml`, 'utf8');
   let ast = parse(fixtures.toString());
 
-  t.same(stringify(ast, '\t'), expected);
+  t.deepEqual(stringify(ast, '\t'), expected);
 });
