@@ -14,7 +14,7 @@
   },
   "homepage": "https://github.com/1000ch/xml-stringify#readme",
   "devDependencies": {
-    "ava": "^0.15.2",
+    "ava": "^0.16.0",
     "xml-parser": "^1.2.1",
     "xo": "^0.16.0"
   },
