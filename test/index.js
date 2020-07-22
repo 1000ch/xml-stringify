@@ -1,54 +1,45 @@
-import fs from 'fs';
-import test from 'ava';
-import parse from 'xml-parser';
-import stringify from '../';
+const fs = require('fs');
+const path = require('path');
+const test = require('ava');
+const parse = require('xml-parser');
+const stringify = require('..');
 
 test('With declaration', t => {
-  t.plan(1);
+  const fixture = fs.readFileSync(path.resolve(__dirname, 'fixtures/1.xml'), 'utf8');
+  const expected = fs.readFileSync(path.resolve(__dirname, 'expected/1.xml'), 'utf8');
+  const ast = parse(fixture);
 
-  let fixtures = fs.readFileSync(`${__dirname}/fixtures/1.xml`, 'utf8');
-  let expected = fs.readFileSync(`${__dirname}/expected/1.xml`, 'utf8');
-  let ast = parse(fixtures.toString());
-
-  t.deepEqual(stringify(ast, 2), expected);
+  t.is(stringify(ast, 2), expected);
 });
 
 test('Without declaration', t => {
-  t.plan(1);
-
-  let fixtures = fs.readFileSync(`${__dirname}/fixtures/2.xml`, 'utf8');
-  let expected = fs.readFileSync(`${__dirname}/expected/2.xml`, 'utf8');
-  let ast = parse(fixtures.toString());
+  const fixture = fs.readFileSync(path.resolve(__dirname, 'fixtures/2.xml'), 'utf8');
+  const expected = fs.readFileSync(path.resolve(__dirname, 'expected/2.xml'), 'utf8');
+  const ast = parse(fixture);
 
   t.deepEqual(stringify(ast), expected);
 });
 
 test('Including isolated tag', t => {
-  t.plan(1);
-
-  let fixtures = fs.readFileSync(`${__dirname}/fixtures/3.xml`, 'utf8');
-  let expected = fs.readFileSync(`${__dirname}/expected/3.xml`, 'utf8');
-  let ast = parse(fixtures.toString());
+  const fixture = fs.readFileSync(path.resolve(__dirname, 'fixtures/3.xml'), 'utf8');
+  const expected = fs.readFileSync(path.resolve(__dirname, 'expected/3.xml'), 'utf8');
+  const ast = parse(fixture);
 
   t.deepEqual(stringify(ast, 2), expected);
 });
 
 test('Indent with specified length space', t => {
-  t.plan(1);
-
-  let fixtures = fs.readFileSync(`${__dirname}/fixtures/4.xml`, 'utf8');
-  let expected = fs.readFileSync(`${__dirname}/expected/4.xml`, 'utf8');
-  let ast = parse(fixtures.toString());
+  const fixture = fs.readFileSync(path.resolve(__dirname, 'fixtures/4.xml'), 'utf8');
+  const expected = fs.readFileSync(path.resolve(__dirname, 'expected/4.xml'), 'utf8');
+  const ast = parse(fixture.toString());
 
   t.deepEqual(stringify(ast, 3), expected);
 });
 
 test('Indent with any specified string', t => {
-  t.plan(1);
-
-  let fixtures = fs.readFileSync(`${__dirname}/fixtures/5.xml`, 'utf8');
-  let expected = fs.readFileSync(`${__dirname}/expected/5.xml`, 'utf8');
-  let ast = parse(fixtures.toString());
+  const fixture = fs.readFileSync(path.resolve(__dirname, 'fixtures/5.xml'), 'utf8');
+  const expected = fs.readFileSync(path.resolve(__dirname, 'expected/5.xml'), 'utf8');
+  const ast = parse(fixture.toString());
 
   t.deepEqual(stringify(ast, '\t'), expected);
 });
