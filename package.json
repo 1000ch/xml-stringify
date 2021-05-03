@@ -1,6 +1,6 @@
 {
   "name": "xml-stringify",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Stringify XML AST built from segmentio/xml-parser.",
   "homepage": "https://github.com/1000ch/xml-stringify#readme",
   "bugs": {
