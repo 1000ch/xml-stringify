@@ -1,4 +1,4 @@
-# xml-stringify [![Build Status](https://travis-ci.org/1000ch/xml-stringify.svg?branch=master)](https://travis-ci.org/1000ch/xml-stringify)
+# xml-stringify [![test](https://github.com/1000ch/xml-stringify/actions/workflows/test.yml/badge.svg)](https://github.com/1000ch/xml-stringify/actions/workflows/test.yml)
 
 Stringify AST built with [segmentio/xml-parser](https://github.com/segmentio/xml-parser).
 
