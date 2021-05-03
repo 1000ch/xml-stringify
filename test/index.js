@@ -1,45 +1,46 @@
-const fs = require('fs');
-const path = require('path');
-const test = require('ava');
-const parse = require('xml-parser');
-const stringify = require('..');
+import fs from 'fs';
+import test from 'ava';
+import parse from 'xml-parser';
+import stringify from '../index.js';
 
-test('With declaration', t => {
-  const fixture = fs.readFileSync(path.resolve(__dirname, 'fixtures/1.xml'), 'utf8');
-  const expected = fs.readFileSync(path.resolve(__dirname, 'expected/1.xml'), 'utf8');
-  const ast = parse(fixture);
+const {readFile} = fs.promises;
 
-  t.is(stringify(ast, 2), expected);
-});
-
-test('Without declaration', t => {
-  const fixture = fs.readFileSync(path.resolve(__dirname, 'fixtures/2.xml'), 'utf8');
-  const expected = fs.readFileSync(path.resolve(__dirname, 'expected/2.xml'), 'utf8');
-  const ast = parse(fixture);
-
-  t.deepEqual(stringify(ast), expected);
-});
-
-test('Including isolated tag', t => {
-  const fixture = fs.readFileSync(path.resolve(__dirname, 'fixtures/3.xml'), 'utf8');
-  const expected = fs.readFileSync(path.resolve(__dirname, 'expected/3.xml'), 'utf8');
-  const ast = parse(fixture);
-
-  t.deepEqual(stringify(ast, 2), expected);
-});
-
-test('Indent with specified length space', t => {
-  const fixture = fs.readFileSync(path.resolve(__dirname, 'fixtures/4.xml'), 'utf8');
-  const expected = fs.readFileSync(path.resolve(__dirname, 'expected/4.xml'), 'utf8');
+test('With declaration', async t => {
+  const fixture = await readFile(new URL('fixtures/1.xml', import.meta.url));
+  const expected = await readFile(new URL('expected/1.xml', import.meta.url));
   const ast = parse(fixture.toString());
 
-  t.deepEqual(stringify(ast, 3), expected);
+  t.is(stringify(ast, 2), expected.toString());
 });
 
-test('Indent with any specified string', t => {
-  const fixture = fs.readFileSync(path.resolve(__dirname, 'fixtures/5.xml'), 'utf8');
-  const expected = fs.readFileSync(path.resolve(__dirname, 'expected/5.xml'), 'utf8');
+test('Without declaration', async t => {
+  const fixture = await readFile(new URL('fixtures/2.xml', import.meta.url));
+  const expected = await readFile(new URL('expected/2.xml', import.meta.url));
   const ast = parse(fixture.toString());
 
-  t.deepEqual(stringify(ast, '\t'), expected);
+  t.is(stringify(ast), expected.toString());
+});
+
+test('Including isolated tag', async t => {
+  const fixture = await readFile(new URL('fixtures/3.xml', import.meta.url));
+  const expected = await readFile(new URL('expected/3.xml', import.meta.url));
+  const ast = parse(fixture.toString());
+
+  t.is(stringify(ast, 2), expected.toString());
+});
+
+test('Indent with specified length space', async t => {
+  const fixture = await readFile(new URL('fixtures/4.xml', import.meta.url));
+  const expected = await readFile(new URL('expected/4.xml', import.meta.url));
+  const ast = parse(fixture.toString());
+
+  t.is(stringify(ast, 3), expected.toString());
+});
+
+test('Indent with any specified string', async t => {
+  const fixture = await readFile(new URL('fixtures/5.xml', import.meta.url));
+  const expected = await readFile(new URL('expected/5.xml', import.meta.url));
+  const ast = parse(fixture.toString());
+
+  t.is(stringify(ast, '\t'), expected.toString());
 });

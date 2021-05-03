@@ -1,48 +1,51 @@
-'use strict';
-
 function createIndent(depth, indent) {
-  return new Array(depth + 1).join(indent);
+  const array = [];
+  array.length = depth + 1;
+
+  return array.join(indent);
 }
 
 function createAttributes(attributes) {
   let html = '';
-  Object.keys(attributes).forEach(key => {
+
+  for (const key of Object.keys(attributes)) {
     html += ` ${key}="${attributes[key]}"`;
-  });
+  }
+
   return html;
 }
 
-function createOpenTag(object) {
-  return `<${object.name}${createAttributes(object.attributes)}>`;
+function createOpenTag({attributes, name}) {
+  return `<${name}${createAttributes(attributes)}>`;
 }
 
-function createCloseTag(object) {
-  return `</${object.name}>`;
+function createCloseTag({name}) {
+  return `</${name}>`;
 }
 
-function createIsolateTag(object) {
-  let xml = '';
-  if (object.content) {
-    xml += `<${object.name}${createAttributes(object.attributes)}>${object.content}</${object.name}>`;
-  } else {
-    xml += `<${object.name}${createAttributes(object.attributes)} />`;
+function createIsolateTag({attributes, content, name}) {
+  if (content) {
+    return `<${name}${createAttributes(attributes)}>${content}</${name}>`;
   }
 
-  return xml;
+  return `<${name}${createAttributes(attributes)} />`;
 }
 
 function createXML(object, depth, indent) {
   let xml = '';
   const br = indent.length === 0 ? '' : '\n';
+
   if (object.children.length > 0) {
     xml += `${createIndent(depth, indent)}${createOpenTag(object)}${br}`;
+
     if (object.content) {
       xml += `${createIndent(depth + 1, indent)}${object.content}${br}`;
     }
 
-    object.children.forEach(child => {
+    for (const child of object.children) {
       xml += createXML(child, depth + 1, indent);
-    });
+    }
+
     xml += `${createIndent(depth, indent)}${createCloseTag(object)}${br}`;
   } else {
     xml += `${createIndent(depth, indent)}${createIsolateTag(object)}${br}`;
@@ -51,8 +54,9 @@ function createXML(object, depth, indent) {
   return xml;
 }
 
-function stringify(ast, arg) {
+export default function stringify(ast, arg) {
   let indent = '';
+
   if (typeof arg === 'number') {
     indent = ' '.repeat(Number.parseInt(arg, 10));
   } else if (typeof arg === 'string') {
@@ -61,6 +65,7 @@ function stringify(ast, arg) {
 
   let xml = '';
   const br = indent.length === 0 ? '' : '\n';
+
   if (ast.declaration) {
     xml += `<?xml${createAttributes(ast.declaration.attributes)}?>${br}`;
   }
@@ -69,5 +74,3 @@ function stringify(ast, arg) {
 
   return xml;
 }
-
-module.exports = stringify;

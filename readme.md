@@ -1,12 +1,12 @@
 # xml-stringify [![Build Status](https://travis-ci.org/1000ch/xml-stringify.svg?branch=master)](https://travis-ci.org/1000ch/xml-stringify)
 
-Stringify AST built from [segmentio/xml-parser](https://github.com/segmentio/xml-parser).
+Stringify AST built with [segmentio/xml-parser](https://github.com/segmentio/xml-parser).
 
 ## Usage
 
 ```javascript
-const parse = require('xml-parser');
-const stringify = require('xml-stringify');
+import parse from 'xml-parser';
+import stringify from 'xml-stringify';
 
 const ast = parse('<foo>Foo!</foo>');
 const xml = stringify(ast);
