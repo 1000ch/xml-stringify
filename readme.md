@@ -1,4 +1,4 @@
-# xml-stringify [![test](https://github.com/1000ch/xml-stringify/actions/workflows/test.yml/badge.svg)](https://github.com/1000ch/xml-stringify/actions/workflows/test.yml)
+# xml-stringify ![test](https://github.com/1000ch/xml-stringify/actions/workflows/test.yml/badge.svg?branch=main)
 
 Stringify AST built with [segmentio/xml-parser](https://github.com/segmentio/xml-parser).
 
