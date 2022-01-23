@@ -29,9 +29,9 @@
     "space": 2
   },
   "devDependencies": {
-    "ava": "^3.15.0",
+    "ava": "^4.0.0",
     "xml-parser": "^1.2.1",
-    "xo": "^0.42.0"
+    "xo": "^0.47.0"
   },
   "engines": {
     "node": ">=12"
